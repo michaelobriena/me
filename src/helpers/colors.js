@@ -306,7 +306,7 @@ module.exports = {
     'text': '#ffffff',
     'secondaryText': 'rgba(255,255,255,0.7)',
     'icons': '#ffffff',
-    'sisabled': 'rgba(255,255,255,0.3)',
+    'disabled': 'rgba(255,255,255,0.3)',
     'hintText': 'rgba(255,255,255,0.3)',
     'dividers': 'rgba(255,255,255,0.12)'
   }

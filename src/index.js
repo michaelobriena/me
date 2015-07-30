@@ -1,7 +1,10 @@
 import FamousEngine from 'famous/core/FamousEngine';
+import MountPoint from 'famous/components/MountPoint';
+import Align from 'famous/components/Align';
+import Size from 'famous/components/Size';
 import DOMElement from 'famous/dom-renderables/DOMElement';
-import {colors} from './helpers/colors';
 import {Tentacles} from './sandbox/Tentacles';
+import {Logo} from './logo/';
 
 FamousEngine.init();
 var root = FamousEngine.createScene().addChild();
@@ -24,6 +27,34 @@ new DOMElement(inBetween, {
 
 var appRoot = inBetween.addChild();
 
-appRoot.addChild(new Tentacles());
+var logoNode = root.addChild();
+logoNode.setOrigin(.5, .5);
+var logoAlign = new Align(logoNode);
+logoAlign.set(.5, .5);
+var logoMountPoint = new MountPoint(logoNode);
+logoMountPoint.set(.5, .5);
+var logoSize = new Size(logoNode);
+logoSize.setAbsolute(300, 70, 0);
+logoNode.setSizeMode(1, 1, 1);
+logoNode.addChild(new Logo());
+
+setTimeout(function() {
+    logoAlign.set(.05, .05, 0, {curve: 'easeOut', duration: 2000});
+    logoMountPoint.set(.05, .05, 0, {curve: 'easeOut', duration: 2000});
+    logoSize.setAbsolute(50, 70, 0, {curve: 'easeOut', duration: 2000});
+}, 3000);
+
+// appRoot.addChild(new Tentacles());
 
 
+var JITTER = root.addChild();
+var el = new DOMElement(JITTER, {content: ' '});
+var id = JITTER.addComponent({
+    onUpdate: function(time) {
+        JITTER.setPosition(100 + time % 100, 0, -40000);
+        if (time < 2000) JITTER.requestUpdateOnNextTick(id);
+
+    }
+});
+
+JITTER.requestUpdate(id);

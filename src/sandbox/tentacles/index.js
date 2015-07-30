@@ -1,8 +1,6 @@
 import Node from 'famous/core/Node';
-import DOMElement from 'famous/dom-renderables/DOMElement';
-import {colors} from '../../helpers/colors';
 import {Box} from '../../helpers/box/Box';
-import {Breather} from '../../helpers/box/Breather';
+import {MiddleBox} from '../../helpers/box/MiddleBox';
 
 export class Tentacles extends Node {
     constructor() {
@@ -28,61 +26,23 @@ export class Tentacles extends Node {
             type: 'dom'
         }));
 
+        this._createMiddleBoxes();
+    }
+
+    _createMiddleBoxes() {
+        var directions = ['+z', '-z', '-x', '+x', '-y', '+y'];
+        var i = 0;
+        var numDirections = directions.length;
+
         this.middleRotationNode = this.addChild();
         this.middleRotationNode.setAbsoluteSize(60, 60, 60);
         this.middleRotationNode.setOrigin(.5, .5, .5);
         this.middleRotationNode.setMountPoint(.5, .5, .5);
         this.middleRotationNode.setAlign(.5, .5, .5);
         this.middleRotationNode.setSizeMode(1, 1, 1);
-        this.middleChildrenNodes = this._createMiddleBoxes();
-    }
 
-    _createMiddleBoxes() {
-        var result = [];
-
-        result.push(this.middleRotationNode.addChild());
-        new Breather(result[0], {direction: '+z'});
-        result[0].addChild(new Box({
-            colors: [],
-            type: 'dom'
-        }));
-
-
-        result.push(this.middleRotationNode.addChild());
-        new Breather(result[1], {direction: '-z'});
-        result[1].addChild(new Box({
-            colors: [],
-            type: 'dom'
-        }));
-
-        result.push(this.middleRotationNode.addChild());
-        new Breather(result[2], {direction: '-x'});
-        result[2].addChild(new Box({
-            colors: [],
-            type: 'dom'
-        }));
-
-        result.push(this.middleRotationNode.addChild());
-        new Breather(result[3], {direction: '+x'});
-        result[3].addChild(new Box({
-            colors: [],
-            type: 'dom'
-        }));
-
-        result.push(this.middleRotationNode.addChild());
-        new Breather(result[4], {direction: '-y'});
-        result[4].addChild(new Box({
-            colors: [],
-            type: 'dom'
-        }));
-
-        result.push(this.middleRotationNode.addChild());
-        new Breather(result[5], {direction: '+y'});
-        result[5].addChild(new Box({
-            colors: [],
-            type: 'dom'
-        }));
-
-        return result;
+        for (; i < numDirections; i++) {
+            this.middleRotationNode.addChild(new MiddleBox({ direction: directions[i] }));
+        }
     }
 }

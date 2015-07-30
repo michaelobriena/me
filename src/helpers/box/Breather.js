@@ -47,8 +47,6 @@ export class Breather {
             case '+z':
                 this._node.setPosition(0, 0, this._depth*2 + (this._depth * mainTransitionable.get()));
                 break;
-            default:
-                break;
         }
 
         this._node.requestUpdateOnNextTick(this._id);
