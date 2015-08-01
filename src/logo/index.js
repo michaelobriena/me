@@ -21,15 +21,16 @@ export class Logo extends Node {
                 cursor: 'pointer'
             }
         });
-        this.addUIEvent('mouseover');
-        this.addUIEvent('click');
-        this.addComponent({
-            onReceive: function(e) {
-                if (e === 'click') {
-                    console.log('click')
-                }
-            }
-        })
+
+        // this.addUIEvent('mouseover');
+        // this.addUIEvent('click');
+        // this.addComponent({
+        //     onReceive: function(e) {
+        //         if (e === 'click') {
+        //             console.log('click')
+        //         }
+        //     }
+        // });
 
         this.bottom = this.addChild();
         this.bottom.setAbsoluteSize(null, 8, null);

@@ -5,13 +5,14 @@ import Size from 'famous/components/Size';
 import DOMElement from 'famous/dom-renderables/DOMElement';
 import {Tentacles} from './sandbox/Tentacles';
 import {Logo} from './logo/';
+import {Sidebar} from './sidebar/';
 
 FamousEngine.init();
 var root = FamousEngine.createScene().addChild();
 
 new DOMElement(root, {
     properties: {
-        backgroundColor: '#303030',
+        backgroundColor: '#212121',
         transformStyle: 'flat',
         overflow: 'hidden'
     }
@@ -40,18 +41,21 @@ logoNode.addChild(new Logo());
 
 setTimeout(function() {
     logoAlign.set(.05, .05, 0, {curve: 'easeOut', duration: 2000});
-    logoMountPoint.set(.05, .05, 0, {curve: 'easeOut', duration: 2000});
+    logoMountPoint.set(0, 0, 0, {curve: 'easeOut', duration: 2000});
     logoSize.setAbsolute(50, 70, 0, {curve: 'easeOut', duration: 2000});
 }, 3000);
 
-// appRoot.addChild(new Tentacles());
+appRoot.addChild(new Tentacles());
 
+root.addChild(new Sidebar())
 
 var JITTER = root.addChild();
+JITTER.setSizeMode(1, 1, 1);
+JITTER.setAbsoluteSize(1, 1, 1)
 var el = new DOMElement(JITTER, {content: ' '});
 var id = JITTER.addComponent({
     onUpdate: function(time) {
-        JITTER.setPosition(100 + time % 100, 0, -40000);
+        JITTER.setPosition(3000 + time % 100, 0, -40000);
         if (time < 2000) JITTER.requestUpdateOnNextTick(id);
 
     }
