@@ -1,9 +1,9 @@
-import Node from 'famous/core/Node';
-import FamousEngine from 'famous/core/FamousEngine';
-import MountPoint from 'famous/components/MountPoint';
-import Align from 'famous/components/Align';
-import Size from 'famous/components/Size';
-import DOMElement from 'famous/dom-renderables/DOMElement';
+import Node from 'famous/src/core/Node';
+import FamousEngine from 'famous/src/core/FamousEngine';
+import MountPoint from 'famous/src/components/MountPoint';
+import Align from 'famous/src/components/Align';
+import Size from 'famous/src/components/Size';
+import DOMElement from 'famous/src/dom-renderables/DOMElement';
 import {Tentacles} from '../sandbox/Tentacles';
 import {Logo} from '../logo/';
 import {Sidebar} from '../sidebar/';
@@ -44,14 +44,13 @@ export class App extends Node {
         logoNode.addChild(new Logo());
 
         setTimeout(function() {
-            logoAlign.set(.05, .05, 0, {curve: 'easeOut', duration: 2000});
-            logoMountPoint.set(0, 0, 0, {curve: 'easeOut', duration: 2000});
-            logoSize.setAbsolute(50, 70, 0, {curve: 'easeOut', duration: 2000});
-        }, 3000);
+            logoAlign.set(.05, .05, 0, {curve: 'easeOut', duration: 0});
+            logoMountPoint.set(0, 0, 0, {curve: 'easeOut', duration: 0});
+            logoSize.setAbsolute(50, 70, 0, {curve: 'easeOut', duration: 0});
+        }, 1);
 
+        root.addChild(new Sidebar());
         // appRoot.addChild(new Tentacles());
-        // root.addChild(new Sidebar());
-
         appRoot.addChild(new About());
     }
 }

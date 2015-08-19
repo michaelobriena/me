@@ -1,4 +1,4 @@
-import Transitionable from 'famous/transitions/Transitionable';
+import Transitionable from 'famous/src/transitions/Transitionable';
 
 var mainTransitionable = new Transitionable(0);
 

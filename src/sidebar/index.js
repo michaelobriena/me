@@ -1,9 +1,9 @@
-import Node from 'famous/core/Node';
-import MountPoint from 'famous/components/MountPoint';
-import Align from 'famous/components/Align';
-import Size from 'famous/components/Size';
-import DOMElement from 'famous/dom-renderables/DOMElement';
-import Transitionable from 'famous/transitions/Transitionable';
+import Node from 'famous/src/core/Node';
+import MountPoint from 'famous/src/components/MountPoint';
+import Align from 'famous/src/components/Align';
+import Size from 'famous/src/components/Size';
+import DOMElement from 'famous/src/dom-renderables/DOMElement';
+import Transitionable from 'famous/src/transitions/Transitionable';
 import colors from '../helpers/colors';
 
 export class Sidebar extends Node {
@@ -38,7 +38,7 @@ export class Sidebar extends Node {
         });
 
         this.panelNode = this.root.addChild();
-        this.panelNode.setPosition(40, 0, 0)
+        this.panelNode.setPosition(40, 0, 0);
         var mountPoint = new MountPoint(this.panelNode);
         new DOMElement(this.panelNode, {
             properties: {

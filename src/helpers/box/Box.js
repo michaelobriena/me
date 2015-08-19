@@ -1,5 +1,5 @@
-import Node from 'famous/core/Node';
-import DOMElement from 'famous/dom-renderables/DOMElement';
+import Node from 'famous/src/core/Node';
+import DOMElement from 'famous/src/dom-renderables/DOMElement';
 import colors from '../../helpers/colors';
 
 export class Box extends Node {

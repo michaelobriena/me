@@ -1,4 +1,4 @@
-import Node from 'famous/core/Node';
+import Node from 'famous/src/core/Node';
 import {Box} from '../../helpers/box/Box';
 import {MiddleBox} from '../../helpers/box/MiddleBox';
 

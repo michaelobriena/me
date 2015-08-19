@@ -1,5 +1,5 @@
-import FamousEngine from 'famous/core/FamousEngine';
-import DOMElement from 'famous/dom-renderables/DOMElement';
+import FamousEngine from 'famous/src/core/FamousEngine';
+import DOMElement from 'famous/src/dom-renderables/DOMElement';
 import {App} from './App/';
 
 FamousEngine.init();

@@ -1,5 +1,5 @@
-import Node from 'famous/core/Node';
-import DOMElement from 'famous/dom-renderables/DOMElement';
+import Node from 'famous/src/core/Node';
+import DOMElement from 'famous/src/dom-renderables/DOMElement';
 import colors from '../../helpers/colors';
 import {Breather} from '../../helpers/box/Breather';
 import {Box} from '../../helpers/box/Box';
