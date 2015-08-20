@@ -10,7 +10,23 @@ export class Logo extends Node {
     constructor(options) {
         super(options);
 
-        this.el = new DOMElement(this, {
+        this.root = this.addChild();
+        this.root.setOrigin(.5, .5);
+        var logoAlign = new Align(this.root);
+        logoAlign.set(.5, .5);
+        var logoMountPoint = new MountPoint(this.root);
+        logoMountPoint.set(.5, .5);
+        var logoSize = new Size(this.root);
+        logoSize.setAbsolute(300, 70, 0);
+        this.root.setSizeMode(1, 1, 1);
+
+        setTimeout(function() {
+            logoAlign.set(.05, .05, 0, {curve: 'easeOut', duration: 0});
+            logoMountPoint.set(0, 0, 0, {curve: 'easeOut', duration: 0});
+            logoSize.setAbsolute(50, 70, 0, {curve: 'easeOut', duration: 0});
+        }, 1);
+
+        this.el = new DOMElement(this.root, {
             content: 'M',
             properties: {
                 color: 'white',
@@ -22,17 +38,7 @@ export class Logo extends Node {
             }
         });
 
-        // this.addUIEvent('mouseover');
-        // this.addUIEvent('click');
-        // this.addComponent({
-        //     onReceive: function(e) {
-        //         if (e === 'click') {
-        //             console.log('click')
-        //         }
-        //     }
-        // });
-
-        this.bottom = this.addChild();
+        this.bottom = this.root.addChild();
         this.bottom.setAbsoluteSize(null, 8, null);
         this.bottom.setSizeMode(0, 1, 0);
         this.bottom.setAlign(0, 1, 0);

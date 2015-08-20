@@ -1,56 +1,42 @@
 import Node from 'famous/src/core/Node';
 import FamousEngine from 'famous/src/core/FamousEngine';
-import MountPoint from 'famous/src/components/MountPoint';
-import Align from 'famous/src/components/Align';
-import Size from 'famous/src/components/Size';
-import DOMElement from 'famous/src/dom-renderables/DOMElement';
 import {Tentacles} from '../sandbox/Tentacles';
+import {Tunnels} from '../sandbox/Tunnels';
 import {Logo} from '../logo/';
 import {Sidebar} from '../sidebar/';
-import {About} from '../About/';
+import {About} from '../about/';
+import {Layer} from '../layers/'
 
 export class App extends Node {
     constructor(options) {
         super(options);
 
-        var root = this.addChild();
-        new DOMElement(root, {
-            properties: {
-                backgroundColor: '#212121',
-                transformStyle: 'flat',
-                overflow: 'hidden'
-            }
-        });
+        this.modal = this.addChild(new Layer({ 
+            id: 'modal',
+            zIndex: 5
+        }));
 
-        var inBetween = root.addChild();
-        new DOMElement(inBetween, {
-            properties: {
-                transformStyle: 'preserve-3d',
-                perspective: '2000px'
-            }
-        });
+        this.logo = this.addChild(new Layer({
+            id: 'logo',
+            zIndex: 4
+        })).addChild(new Logo());
 
-        var appRoot = inBetween.addChild();
+        this.sidebar = this.addChild(new Layer({
+            id: 'sidebar',
+            zIndex: 3
+        })).addChild(new Sidebar());
 
-        var logoNode = root.addChild();
-        logoNode.setOrigin(.5, .5);
-        var logoAlign = new Align(logoNode);
-        logoAlign.set(.5, .5);
-        var logoMountPoint = new MountPoint(logoNode);
-        logoMountPoint.set(.5, .5);
-        var logoSize = new Size(logoNode);
-        logoSize.setAbsolute(300, 70, 0);
-        logoNode.setSizeMode(1, 1, 1);
-        logoNode.addChild(new Logo());
+        this.main = this.addChild(new Layer({
+            id: 'main',
+            zIndex: 2,
+            backgroundColor: '#212121',
+            perspective: '2000px'
+        })).addChild(new About());
+        // })).addChild(new Tunnels());
 
-        setTimeout(function() {
-            logoAlign.set(.05, .05, 0, {curve: 'easeOut', duration: 0});
-            logoMountPoint.set(0, 0, 0, {curve: 'easeOut', duration: 0});
-            logoSize.setAbsolute(50, 70, 0, {curve: 'easeOut', duration: 0});
-        }, 1);
-
-        root.addChild(new Sidebar());
-        // appRoot.addChild(new Tentacles());
-        appRoot.addChild(new About());
+        this.backgroundLayer = this.addChild(new Layer({
+            id: 'background',
+            zIndex: 1
+        }));
     }
 }

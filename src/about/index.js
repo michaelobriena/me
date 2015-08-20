@@ -1,5 +1,6 @@
 import Node from 'famous/src/core/Node';
 import DOMElement from 'famous/src/dom-renderables/DOMElement';
+import Sequential from 'famous/src/layouts/Sequential';
 import colors from '../helpers/colors';
 import Blurb from './Blurb';
 import Reading from './Reading';
@@ -23,10 +24,10 @@ export class About extends Node {
         this.root.setAlign(.5, 0, 0);
         this.root.setMountPoint(.5, 0, 0);
 
+        this.sequential = new Sequential();
+        this.sequential.setPosition(0, 100, 0);
 
-        // this.sequentialLayout = new SequentialLayout();
-        this.titleNode = this.root.addChild();
-        this.titleNode.setPosition(0, 100, 0);
+        this.titleNode = this.sequential.addChild();
         this.titleNode.setAbsoluteSize(null, 100, null);
         this.titleNode.setSizeMode(0, 1, 0);
         this.titleEl = new DOMElement(this.titleNode, {
@@ -40,8 +41,9 @@ export class About extends Node {
             }
         });
 
-        this.blurbNode = this.titleNode.addChild();
-        this.blurbNode.setPosition(0, 100, 0);
+        this.blurbNode = this.sequential.addChild();
+        this.blurbNode.setAbsoluteSize(null, 200, null);
+        this.blurbNode.setSizeMode(0, 1, 0);
         this.blurbEl = new DOMElement(this.blurbNode, {
             content: 'Hi, I\'m Mike O\'Brien, and I love to find patterns in everything.  I am currently a Software Engineer at Famous where I work on the rendering engine and using it to build great experiences.<br><br>Hope you enjoy my site and see the progress that gets made here as I continue my efforts to learn all I can.  Live your life unapologetically.',
             properties: {
@@ -54,8 +56,9 @@ export class About extends Node {
             }
         });
 
-        this.listeningToTitle = this.blurbNode.addChild();
-        this.listeningToTitle.setPosition(0, 200, 0);
+        this.listeningToTitle = this.sequential.addChild();
+        this.listeningToTitle.setAbsoluteSize(null, 100, null);
+        this.listeningToTitle.setSizeMode(0, 1, 0);
         this.listeningToTitleEl = new DOMElement(this.listeningToTitle, {
             content: 'What I am listening to',
             properties: {
@@ -68,8 +71,7 @@ export class About extends Node {
             }
         });
 
-        this.listeningTo = this.listeningToTitle.addChild(new ListeningTo());
-        this.listeningTo.setPosition(0, 100, 0)
+        this.listeningTo = this.sequential.addChild(new ListeningTo());
         this.listeningTo.setSizeMode(0, 1, 0);
         this.listeningTo.setAbsoluteSize(null, 400, null);
     }

@@ -1,5 +1,6 @@
 import Node from 'famous/src/core/Node';
 import MountPoint from 'famous/src/components/MountPoint';
+import Position from 'famous/src/components/Position';
 import Align from 'famous/src/components/Align';
 import Size from 'famous/src/components/Size';
 import DOMElement from 'famous/src/dom-renderables/DOMElement';
@@ -18,7 +19,7 @@ export class Sidebar extends Node {
 
         this.containerEl = new DOMElement(this.root, {
             properties: {
-                boxShadow: '2px 0px 5px rgba(0,0,0,0.26)'
+                boxShadow: '5px 0px 8px rgba(0,0,0,0.26)'
             }
         });
 
@@ -28,18 +29,15 @@ export class Sidebar extends Node {
         this.root.addUIEvent('click');
         this.root.addComponent({
             onReceive: function(e) {
-                if (e === 'mouseenter') {
-                    mountPoint.set(1, 0, 0, {curve: 'easeIn', duration: 300});
-                }
-                else if (e === 'mouseleave') {
-                    mountPoint.set(0, 0, 0, {curve: 'easeIn', duration: 300});
-                }
+                if (e === 'mouseenter') pos.set(-260, 0, 0, {curve: 'linear', duration: 300});
+                else if (e === 'mouseleave') pos.set(40, 0, 0, {curve: 'linear', duration: 300});
             }
         });
 
         this.panelNode = this.root.addChild();
         this.panelNode.setPosition(40, 0, 0);
-        var mountPoint = new MountPoint(this.panelNode);
+        var pos = new Position(this.panelNode);
+        pos.set(40);
         new DOMElement(this.panelNode, {
             properties: {
                 backgroundColor: '#303030'
