@@ -61,7 +61,14 @@ export class Sidebar extends Node {
         })
 
         this.panelBody = this.panelNode.addChild();
+        this.panelBody.setOpacity(.5)
         this.panelBody.setDifferentialSize(0, -300, 0);
         this.panelBody.setPosition(0, 300, 0);
+        new DOMElement(this.panelNode, {
+            properties: {
+                backgroundColor: '#303030'
+            }
+        });
+
     }
 }

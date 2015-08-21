@@ -4,8 +4,8 @@ import Transitionable from 'famous/src/transitions/Transitionable';
 import colors from '../../helpers/colors';
 
 export class Tunnels extends Node {
-    constructor() {
-        super();
+    constructor(options) {
+        super(options);
 
         this.perspectiveWindow = this.addChild();
         new DOMElement(this.perspectiveWindow, {
@@ -21,9 +21,9 @@ export class Tunnels extends Node {
         this.root.setAlign(.5, .5, .5);
         this.root.setSizeMode(1, 1, 1);
 
-        this.minSpacing = 5;
-        this.maxSpacing = 20;
-        this.borderRadius = 40;
+        this.minSpacing = 20;
+        this.maxSpacing = 40;
+        this.borderRadius = 50;
         this.spacing = new Transitionable(0);
         this.torque = new Transitionable(0); 
 
@@ -32,16 +32,17 @@ export class Tunnels extends Node {
         var _this = this;
         var id = this.root.addComponent({
             onUpdate: function(time) {
-                _this.root.setRotation(time/2000, time/2000, 0);
-                _this.root.requestUpdateOnNextTick(id);
-
                 var len = _this.slices.length;
                 var torque = _this.torque.get();
                 var spacing = _this.spacing.get();
                 for (var i = 0; i < len; i++) {
-                    _this.slices[i].setPosition(0, 0, (i * spacing) - 25 * spacing);
-                    _this.slices[i].setRotation(0, 0, torque * -i / len);
+                    _this.slices[i].setPosition(0, 0, (i * spacing) - (len/2) * spacing);
+                    // _this.slices[i].setRotation(0, 0, torque * 2 * Math.PI * -(i - len/2 ) / len);
+                    _this.slices[i].setRotation(0, 0, (i - len/2) / (len/2) * torque * 2 * Math.PI);
                 }
+
+                _this.root.setRotation(time/2000, time/2000, 0);
+                _this.root.requestUpdateOnNextTick(id);
             }
         });
         this.root.requestUpdate(id);
@@ -55,7 +56,7 @@ export class Tunnels extends Node {
         var node;
         var myColors = ['green', 'yellow', 'purple'];
 
-        for (var i = 0; i < 50; i++) {
+        for (var i = 0; i < 30; i++) {
             node = this.root.addChild();
             node.setPosition(0, 0, (-10 * i) + 250);
             node.setOrigin(.5, .5, .5);
@@ -65,12 +66,14 @@ export class Tunnels extends Node {
                     borderRadius: this.borderRadius + 'px'
                 }
             });
+
+            // node.setOpacity(.5)
             this.slices.push(node);
         }
     }
 
     startTorqueAnimation() {
-        this.torque.set(4*Math.PI, {
+        this.torque.set(1, {
             curve: 'easeInOut',
             duration: 5000
         }, function() {
@@ -96,5 +99,9 @@ export class Tunnels extends Node {
                 this.startBreath();
             }.bind(this));
         }.bind(this));
+    }
+
+    getSidebar() {
+
     }
 }
